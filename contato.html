@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Contato Del</title>
+
+  </head>
+  <link rel="shortcut icon" href="../img/icon/D.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+        
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("token");
+   })();
+</script>
+<body>
+
+  <div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="contact-form form">
+				<form onsubmit="return sendMail(this);">
+          <legend>Contato Del</legend>
+          <p class="hint-text">Adoraría ouvir de você sua ideia, por favor, mande-me uma mensagem se você tiver alguma dúvidas.</p>
+						<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" class="form-control" id="name" required>
+							</div>       
+					<div class="form-group">
+						<label for="email">Email Address</label>
+						<input type="email" class="form-control" id="email" required>
+					</div>
+
+						<label for="projectsummary">Message</label>
+						<textarea class="form-control" id="projectsummary" rows="5" required></textarea>
+            
+            <input type="submit" class="btn btn-primary rogress-bar" value="Submit" >
+            
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script >
+	function sendMail(contactForm) {
+		emailjs.send("token email","token template", {
+										"from_name": contactForm.name.value,
+										"from_email": contactForm.email.value,
+										"project_request": contactForm.projectsummary.value
+	})
+	.then(
+		function(response){
+			console.log("Success!", response);
+			swal("Email enviado com sucesso!", "Obrigado por enviar.", "success")
+			.then(function() {
+		window.location = "../index.html";
+		});
+
+
+		},
+		function(error) {
+			console.log("Failed!", error);
+			swal("Oops...", "Ocorreu um erro ao enviar o email.", "error");
+		});
+		return false;
+	}
+</script>
+</body>
+
+</html>
